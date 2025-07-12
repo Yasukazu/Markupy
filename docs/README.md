@@ -113,3 +113,18 @@ The full documentation is available at [markupy.witiz.com](https://markupy.witiz
 - [Integrating with Flask](https://markupy.witiz.com/flask/)
 - [Integrating with Starlette](https://markupy.witiz.com/starlette/)
 - [html2markupy](https://markupy.witiz.com/html2markupy/)
+
+## HTML to `markupy` script conversion by `to_markupy` function
+```python
+from markupy._private.html_to_markupy.parser import to_markupy
+from markupy.elements import *
+from markupy import Fragment
+
+from markdown import markdown # just for an example
+
+md_html = markdown("# Title\n## Sub\n - item") # HTML text
+md_py = to_markupy(md_html, no_import=True) # python code
+md_comp = eval(md_py) # Component object
+md_main = Main[md_comp] # wrap with 'Main' element
+print(md_main)
+```
