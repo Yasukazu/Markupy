@@ -26,6 +26,12 @@ def main() -> None:
         default=False,
     )
     parser.add_argument(
+        "--no-import",
+        action=argparse.BooleanOptionalAction,
+        help="Output mode without import",
+        default=False,
+    )
+    parser.add_argument(
         "input",
         type=argparse.FileType("r"),
         nargs="?",
@@ -43,6 +49,7 @@ def main() -> None:
     use_selector: bool = args.selector
     use_dict: bool = args.dict_attrs
     use_import_el: bool = args.el_prefix
+    no_import: bool = args.no_import
 
     print(
         to_markupy(
@@ -50,5 +57,6 @@ def main() -> None:
             use_selector=use_selector,
             use_dict=use_dict,
             use_import_el=use_import_el,
+            no_import=no_import
         )
     )

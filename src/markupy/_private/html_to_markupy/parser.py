@@ -270,6 +270,7 @@ def to_markupy(
     use_selector: bool = True,
     use_dict: bool = False,
     use_import_el: bool = False,
+    no_import: bool = False
 ) -> str:
     parser = MarkupyParser(
         use_selector=use_selector, use_dict=use_dict, use_import_el=use_import_el
@@ -279,5 +280,5 @@ def to_markupy(
     if tag := parser.unclosed_stack.pop():
         raise MarkupyError(f"Opening tag `<{tag}>` was not closed")
     if code := parser.output_code():
-        return f"{parser.output_imports()}{code}"
-    return ""
+        return code if no_import else f"{parser.output_imports()}{code}"
+    raise ValueError("No output code!")
